@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard</title>
+    <style type="text/css" media="all">
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(https://c4.wallpaperflare.com/wallpaper/165/600/954/iphone-ios-ipad-ipod-wallpaper-preview.jpg);
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8); /* Adding transparency to form background */
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 500px;
+            margin-bottom: 20px;
+        }
+
+        .key {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .key:hover {
+            background-color: #ccc;
+        }
+
+        .key:active {
+            transform: scale(0.9);
+        }
+
+        /* Centering and adjusting button positions */
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Special buttons like Clear, Space, Caps Lock */
+        .special-key {
+            width: 110px;
+        }
+
+        .space-key {
+            width: 240px;
+        }
+
+        @keyframes key {
+            0% { box-shadow: 0px 0px 7px red; }
+            25% { box-shadow: 0px 0px 7px green; }
+            50% { box-shadow: 0px 0px 7px blue; }
+            75% { box-shadow: 0px 0px 7px yellow; }
+            100% { box-shadow: 0px 0px 7px orange; }
+        }
+
+        .key {
+            animation: key 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <form name="keyboard">
+        <input type="text" name="screen" size="45" style="height: 30px; font-size: 15px; background-color: white;" readonly>
+
+        <!-- First row -->
+        <div class="keyboard-row">
+            <input type="button" value="q" class="key" onclick="keyboard.screen.value += getKeyValue('q')">
+            <input type="button" value="w" class="key" onclick="keyboard.screen.value += getKeyValue('w')">
+            <input type="button" value="e" class="key" onclick="keyboard.screen.value += getKeyValue('e')">
+            <input type="button" value="r" class="key" onclick="keyboard.screen.value += getKeyValue('r')">
+            <input type="button" value="t" class="key" onclick="keyboard.screen.value += getKeyValue('t')">
+            <input type="button" value="y" class="key" onclick="keyboard.screen.value += getKeyValue('y')">
+            <input type="button" value="u" class="key" onclick="keyboard.screen.value += getKeyValue('u')">
+            <input type="button" value="i" class="key" onclick="keyboard.screen.value += getKeyValue('i')">
+            <input type="button" value="o" class="key" onclick="keyboard.screen.value += getKeyValue('o')">
+            <input type="button" value="p" class="key" onclick="keyboard.screen.value += getKeyValue('p')">
+        </div>
+
+        <!-- Second row -->
+        <div class="keyboard-row">
+            <input type="button" value="a" class="key" onclick="keyboard.screen.value += getKeyValue('a')">
+            <input type="button" value="s" class="key" onclick="keyboard.screen.value += getKeyValue('s')">
+            <input type="button" value="d" class="key" onclick="keyboard.screen.value += getKeyValue('d')">
+            <input type="button" value="f" class="key" onclick="keyboard.screen.value += getKeyValue('f')">
+            <input type="button" value="g" class="key" onclick="keyboard.screen.value += getKeyValue('g')">
+            <input type="button" value="h" class="key" onclick="keyboard.screen.value += getKeyValue('h')">
+            <input type="button" value="j" class="key" onclick="keyboard.screen.value += getKeyValue('j')">
+            <input type="button" value="k" class="key" onclick="keyboard.screen.value += getKeyValue('k')">
+            <input type="button" value="l" class="key" onclick="keyboard.screen.value += getKeyValue('l')">
+        </div>
+
+        <!-- Third row -->
+        <div class="keyboard-row">
+            <input type="button" value="z" class="key" onclick="keyboard.screen.value += getKeyValue('z')">
+            <input type="button" value="x" class="key" onclick="keyboard.screen.value += getKeyValue('x')">
+            <input type="button" value="c" class="key" onclick="keyboard.screen.value += getKeyValue('c')">
+            <input type="button" value="v" class="key" onclick="keyboard.screen.value += getKeyValue('v')">
+            <input type="button" value="b" class="key" onclick="keyboard.screen.value += getKeyValue('b')">
+            <input type="button" value="n" class="key" onclick="keyboard.screen.value += getKeyValue('n')">
+            <input type="button" value="m" class="key" onclick="keyboard.screen.value += getKeyValue('m')">
+        </div>
+
+        <!-- Fourth row for special buttons -->
+        <div class="keyboard-row">
+            <input type="button" value="Clear" class="key special-key" onclick="keyboard.screen.value = ''">
+            <input type="button" value="Caps Lock" class="key special-key" onclick="toggleCapsLock()">
+            <input type="button" value="Space" class="key space-key" onclick="keyboard.screen.value += ' '">
+        </div>
+    </form>
+
+    <script>
+        let isCapsLockOn = false;
+
+        function toggleCapsLock() {
+            isCapsLockOn = !isCapsLockOn;
+            alert('Caps Lock is ' + (isCapsLockOn ? 'ON' : 'OFF')); // Visual feedback for caps lock status
+        }
+
+        function getKeyValue(key) {
+            if (isCapsLockOn) {
+                return key.toUpperCase();
+            } else {
+                return key;
+            }
+        }
+    </script>
+</body>
+</html>
